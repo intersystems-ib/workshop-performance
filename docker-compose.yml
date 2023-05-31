@@ -1,0 +1,66 @@
+version: "2.2"
+services:  
+  # mysql
+  mysql:
+    build:
+      context: mysql
+    container_name: mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: SYS
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testpassword
+      MYSQL_DATABASE: test
+    volumes:
+    - ./mysql/sql/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    ports:
+      - 3306:3306
+
+  # postgres
+  postgres:
+    build:
+      context: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpassword
+    volumes:
+    - ./postgres/sql/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    ports:
+      - 5432:5432
+  
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    depends_on:
+      - mysql
+      - postgres
+    ports:
+      - 8081:8080
+
+  # iris
+  iris:
+    init: true
+    container_name: iris
+    build:
+      context: .
+      dockerfile: iris/Dockerfile
+    ports:
+      - 52773:52773
+      - 1972:1972
+    command: --check-caps false
+
+  # tomcat
+  tomcat:
+    init: true
+    container_name: tomcat
+    build:
+      context: .
+      dockerfile: tomcat/Dockerfile
+    volumes:
+      - ./tomcat/performance.war:/usr/local/tomcat/webapps/performance.war
+    ports:
+      - 8080:8080

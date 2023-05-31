@@ -1,0 +1,14 @@
+USE DATABASE "USER"
+GO
+CREATE SCHEMA Test
+GO
+CREATE TABLE Test.Patient (
+    Name VARCHAR(225),
+    Lastname VARCHAR(225),
+    Photo LONGVARBINARY
+)
+GO
+INSERT INTO Test.Patient VALUES ('Juan','Sanz', null)
+GO
+INSERT INTO Test.Patient VALUES ('Lorena', 'Gil', null)
+GO
