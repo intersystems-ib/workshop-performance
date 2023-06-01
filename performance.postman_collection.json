@@ -156,6 +156,72 @@
 			"response": []
 		},
 		{
+			"name": "Select group by - Postgres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/selectGroupBy/postgres",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"selectGroupBy",
+						"postgres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select group by - Mysql",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/selectGroupBy/mysql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"selectGroupBy",
+						"mysql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select group by - IRIS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/selectGroupBy/iris",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"selectGroupBy",
+						"iris"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Select - Postgres",
 			"request": {
 				"method": "GET",
@@ -189,7 +255,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/performance/tests/select/postgres?total=1000",
+					"raw": "http://localhost:8080/performance/tests/select/mysql?total=1000",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -199,7 +265,7 @@
 						"performance",
 						"tests",
 						"select",
-						"postgres"
+						"mysql"
 					],
 					"query": [
 						{
@@ -273,7 +339,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/performance/tests/insertBlob/postgres?total=1000",
+					"raw": "http://localhost:8080/performance/tests/insertBlob/mysql?total=1000",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -283,7 +349,7 @@
 						"performance",
 						"tests",
 						"insertBlob",
-						"postgres"
+						"mysql"
 					],
 					"query": [
 						{
