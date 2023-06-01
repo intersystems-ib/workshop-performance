@@ -2,13 +2,51 @@ USE DATABASE "USER"
 GO
 CREATE SCHEMA Test
 GO
+CREATE TABLE Test.Country (
+    Id INT,
+    Name VARCHAR(225),
+    CONSTRAINT CountryPK PRIMARY KEY (Id)
+)
+GO
+CREATE TABLE Test.City (
+    Id INT,
+    Name VARCHAR(225),    
+    Country INT,
+    CONSTRAINT CityPK PRIMARY KEY (Id), 
+    CONSTRAINT CountryFK FOREIGN KEY (Country) REFERENCES Test.Country (Id))
+GO
 CREATE TABLE Test.Patient (
     Name VARCHAR(225),
     Lastname VARCHAR(225),
-    Photo LONGVARBINARY
+    Photo LONGVARBINARY,
+    Phone VARCHAR(14),
+    Address VARCHAR(225),
+    City INT,
+    CONSTRAINT CityFK FOREIGN KEY (City) REFERENCES Test.City (Id)
 )
 GO
-INSERT INTO Test.Patient VALUES ('Juan','Sanz', null)
+INSERT INTO Test.Country VALUES (1,'Spain')
 GO
-INSERT INTO Test.Patient VALUES ('Lorena', 'Gil', null)
+INSERT INTO Test.Country VALUES (2,'France')
 GO
+INSERT INTO Test.Country VALUES (3,'Portugal')
+GO
+INSERT INTO Test.Country VALUES (4,'Germany')
+GO
+INSERT INTO Test.City VALUES (1,'Madrid',1)
+GO
+INSERT INTO Test.City VALUES (2,'Valencia',1)
+GO
+INSERT INTO Test.City VALUES (3,'Paris',2)
+GO
+INSERT INTO Test.City VALUES (4,'Bordeaux',2)
+GO
+INSERT INTO Test.City VALUES (5,'Lisbon',3)
+GO
+INSERT INTO Test.City VALUES (6,'Porto',3)
+GO
+INSERT INTO Test.City VALUES (7,'Berlin',4)
+GO
+INSERT INTO Test.City VALUES (8,'Frankfurt',4)
+GO
+

@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Insert",
+			"name": "Insert - Postgres",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -34,7 +34,85 @@
 			"response": []
 		},
 		{
-			"name": "Select like",
+			"name": "Insert - Mysql",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/insert/mysql?total=1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"insert",
+						"mysql"
+					],
+					"query": [
+						{
+							"key": "total",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert - IRIS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/insert/iris?total=1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"insert",
+						"iris"
+					],
+					"query": [
+						{
+							"key": "total",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select like - Postgres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/selectLike/postgres",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"selectLike",
+						"postgres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select like - Mysql",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -56,7 +134,29 @@
 			"response": []
 		},
 		{
-			"name": "Select",
+			"name": "Select like - IRIS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/selectLike/iris",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"selectLike",
+						"iris"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select - Postgres",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -84,7 +184,63 @@
 			"response": []
 		},
 		{
-			"name": "Insert blob",
+			"name": "Select - Mysql",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/select/postgres?total=1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"select",
+						"postgres"
+					],
+					"query": [
+						{
+							"key": "total",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select - IRIS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/select/iris?total=1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"select",
+						"iris"
+					],
+					"query": [
+						{
+							"key": "total",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert blob - Postgres",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -100,6 +256,62 @@
 						"tests",
 						"insertBlob",
 						"postgres"
+					],
+					"query": [
+						{
+							"key": "total",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert blob - Mysql",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/insertBlob/postgres?total=1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"insertBlob",
+						"postgres"
+					],
+					"query": [
+						{
+							"key": "total",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert blob - IRIS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/insertBlob/iris?total=1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"insertBlob",
+						"iris"
 					],
 					"query": [
 						{

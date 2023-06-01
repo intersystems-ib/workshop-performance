@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Random;
 
 import javax.sql.DataSource;
 
@@ -43,19 +44,19 @@ public class PerformanceController {
     
         DataSource ds = null;
         String insertQuery = "";
-        int result = 0;
+        int recorded = 0;
         switch (db) {
             case "mysql":
                 ds = MyDataSourceFactory.getMySQLDataSource(mysqlUsername, mysqlUrl, mysqlPassword);
-                insertQuery = "INSERT INTO test.patient VALUES (null, 'Name%d', 'LastName%d', null)";
+                insertQuery = "INSERT INTO test.patient VALUES (null, ?, ?, null, ?, ?, ?)";
                 break;
             case "postgres":
                 ds = MyDataSourceFactory.getPostgresDataSource(postgresUsername, postgresUrl, postgresPassword);
-                insertQuery = "INSERT INTO test.patient (\"name\",\"lastname\") VALUES ('Name%d', 'LastName%d')";
+                insertQuery = "INSERT INTO test.patient (\"name\",\"lastname\",\"phone\",\"address\",\"city\") VALUES (?, ?, ?, ?, ?)";
                 break;
             case "iris":
                 ds = MyDataSourceFactory.getIrisDataSource(irisUsername, irisUrl, irisPassword);
-                insertQuery = "INSERT INTO test.patient VALUES ('Name%d', 'LastName%d', null)";
+                insertQuery = "INSERT INTO test.patient VALUES (?, ?, null, ?, ?, ?)";
                 break;
         
             default:
@@ -64,12 +65,19 @@ public class PerformanceController {
         try
         {
             Connection connection = ds.getConnection();
-            Statement stmt = null;
-		    // ResultSet rs = null;
-            stmt = connection.createStatement();
+            PreparedStatement pstmt = null;
+		    // ResultSet rs = null;            
             for (int i = 1; i <= total; i++ )
             {
-                result += stmt.executeUpdate(String.format(insertQuery, i, i));
+                Random random = new Random();
+                pstmt = connection.prepareStatement(insertQuery);
+                pstmt.setString(1, "Name"+i);
+                pstmt.setString(2, "LastName"+i);
+                pstmt.setString(3, "Phone"+i);
+                pstmt.setString(4, "Address"+i);
+                pstmt.setInt(5, random.nextInt(8 - 1) + 1);
+                pstmt.executeUpdate();
+                recorded++;
             }
         }
         catch (Exception e)
@@ -77,7 +85,7 @@ public class PerformanceController {
             e.printStackTrace();
         }
          
-        return "Records inserted: "+result;
+        return "Records inserted: "+recorded;
     }
 
     @GetMapping("/tests/select/{db}")
@@ -130,15 +138,15 @@ public class PerformanceController {
         switch (db) {
             case "mysql":
                 ds = MyDataSourceFactory.getMySQLDataSource(mysqlUsername, mysqlUrl, mysqlPassword);
-                insertQuery = "INSERT INTO test.patient (Name, Lastname, Photo) VALUES (?, ?, ?)";
+                insertQuery = "INSERT INTO test.patient (Name, Lastname, Photo, Phone, Address, City) VALUES (?, ?, ?, ?, ?, ?)";
                 break;
             case "postgres":
                 ds = MyDataSourceFactory.getPostgresDataSource(postgresUsername, postgresUrl, postgresPassword);
-                insertQuery = "INSERT INTO test.patient (\"name\",\"lastname\", \"photo\") VALUES (?, ?, ?)";
+                insertQuery = "INSERT INTO test.patient (\"name\",\"lastname\", \"photo\", \"phone\", \"address\", \"city\") VALUES (?, ?, ?, ?, ?, ?)";
                 break;
             case "iris":
                 ds = MyDataSourceFactory.getIrisDataSource(irisUsername, irisUrl, irisPassword);
-                insertQuery = "INSERT INTO test.patient VALUES (?, ?, ?)";
+                insertQuery = "INSERT INTO test.patient VALUES (?, ?, ?,?, ?, ?)";
                 break;
         
             default:
@@ -152,11 +160,15 @@ public class PerformanceController {
             for (int i = 1; i <= total; i++ )
             {
                 InputStream is = PerformanceController.class.getClassLoader().getResourceAsStream("static/photo.jpg");
+                Random random = new Random();
 
                 pstmt = connection.prepareStatement(insertQuery);
                 pstmt.setString(1, "Name"+i);
                 pstmt.setString(2, "LastName"+i);
                 pstmt.setBinaryStream(3, is);
+                pstmt.setString(4, "Phone"+i);
+                pstmt.setString(5, "Address"+i);
+                pstmt.setInt(6, random.nextInt(8 - 1) + 1);
                 pstmt.executeUpdate();
                 recorded++;
             }
@@ -176,6 +188,46 @@ public class PerformanceController {
         String selectQuery = "";
         int result = 0;
         selectQuery = "SELECT * FROM test.patient WHERE Name like '%12'";
+        switch (db) {
+            case "mysql":
+                ds = MyDataSourceFactory.getMySQLDataSource(mysqlUsername, mysqlUrl, mysqlPassword);            
+                break;
+            case "postgres":
+                ds = MyDataSourceFactory.getPostgresDataSource(postgresUsername, postgresUrl, postgresPassword);
+                break;
+            case "iris":
+                ds = MyDataSourceFactory.getIrisDataSource(irisUsername, irisUrl, irisPassword);
+                break;
+        
+            default:
+                break;
+        }
+        try
+        {
+            Connection connection = ds.getConnection();
+            Statement stmt = null;
+		    ResultSet rs = null;
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(selectQuery);
+            while (rs.next()) {
+                result++;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+         
+        return "Total records: "+result;
+    }
+
+    @GetMapping("/tests/selectGroupBy/{db}")
+    String selectGroupBy(@PathVariable ("db") String db) {
+    
+        DataSource ds = null;
+        String selectQuery = "";
+        int result = 0;
+        selectQuery = "SELECT count(p.Name), c.Name FROM test.patient p left join test.city c on p.City = c.Id GROUP BY c.Name";
         switch (db) {
             case "mysql":
                 ds = MyDataSourceFactory.getMySQLDataSource(mysqlUsername, mysqlUrl, mysqlPassword);            
