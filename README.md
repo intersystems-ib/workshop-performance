@@ -20,7 +20,7 @@ $ cd workshop-performance
 $ docker-compose build
 ```
 
-# Example
+# Configuration
 
 The main purpose of this example is to test the performance of different databases connected by JDBC to a Java project.
 
@@ -37,7 +37,7 @@ You can check PostgreSQL and MySQL databases from Adminer
 
 ## MySQL Adminer
 
-* Open [Adminer](http://localhost:8080) using the following parameters:
+* Open [Adminer](http://localhost:8081) using the following parameters:
   * Server: `mysql`
   * Username: `testuser`
   * Password: `testpassword`
@@ -46,7 +46,7 @@ You can check PostgreSQL and MySQL databases from Adminer
 
 ## PostgreSQL Adminer
 
-* Open [Adminer](http://localhost:8080) using the following parameters:
+* Open [Adminer](http://localhost:8081) using the following parameters:
   * Server: `posrgres`
   * Username: `testuser`
   * Password: `testpassword`
@@ -61,7 +61,7 @@ You can check PostgreSQL and MySQL databases from Adminer
 * Open System Explorer --> SQL
 * Select NAMESPACE USER and Schema `Test`
 
-# Modifying default war 
+# Modifying default war file
 
 The war generated doesn't need further modifications to work, but you can edit the java project to test different queries. In order to generate a new war you will have to install [Maven](https://maven.apache.org/download.cgi) in your computer and add the InterSystems IRIS JDBC library into your [local maven repository](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html).
 
