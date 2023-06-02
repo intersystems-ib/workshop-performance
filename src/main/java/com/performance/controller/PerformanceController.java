@@ -260,5 +260,79 @@ public class PerformanceController {
          
         return "Total records: "+result;
     }
+
+    @GetMapping("/tests/update/{db}")
+    String UpdateRecords(@PathVariable ("db") String db) {
+    
+        DataSource ds = null;
+        String selectQuery = "";
+        int result = 0;
+        selectQuery = "UPDATE test.patient SET Phone = '+15553535301' WHERE Name in (SELECT Name FROM test.patient where Name like '%12')";
+        switch (db) {
+            case "mysql":
+                ds = MyDataSourceFactory.getMySQLDataSource(mysqlUsername, mysqlUrl, mysqlPassword);            
+                break;
+            case "postgres":
+                ds = MyDataSourceFactory.getPostgresDataSource(postgresUsername, postgresUrl, postgresPassword);
+                break;
+            case "iris":
+                ds = MyDataSourceFactory.getIrisDataSource(irisUsername, irisUrl, irisPassword);
+                break;
+        
+            default:
+                break;
+        }
+        try
+        {
+            Connection connection = ds.getConnection();
+            Statement stmt = null;
+            stmt = connection.createStatement();
+            result = stmt.executeUpdate(selectQuery);
+            
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+         
+        return "Result of update: "+result;
+    }
+
+    @GetMapping("/tests/delete/{db}")
+    String DeleteRecords(@PathVariable ("db") String db) {
+    
+        DataSource ds = null;
+        String selectQuery = "";
+        int result = 0;
+        selectQuery = "DELETE test.patient WHERE Name in (SELECT Name FROM test.patient where Name like '%12')";
+        switch (db) {
+            case "mysql":
+                ds = MyDataSourceFactory.getMySQLDataSource(mysqlUsername, mysqlUrl, mysqlPassword);            
+                break;
+            case "postgres":
+                ds = MyDataSourceFactory.getPostgresDataSource(postgresUsername, postgresUrl, postgresPassword);
+                break;
+            case "iris":
+                ds = MyDataSourceFactory.getIrisDataSource(irisUsername, irisUrl, irisPassword);
+                break;
+        
+            default:
+                break;
+        }
+        try
+        {
+            Connection connection = ds.getConnection();
+            Statement stmt = null;
+            stmt = connection.createStatement();
+            result = stmt.executeUpdate(selectQuery);
+            
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+         
+        return "Result of update: "+result;
+    }
     
 }

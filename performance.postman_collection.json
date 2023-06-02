@@ -39,7 +39,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/performance/tests/insert/mysql?total=1000",
+					"raw": "http://localhost:8080/performance/tests/insert/mysql?total=10000",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -54,7 +54,7 @@
 					"query": [
 						{
 							"key": "total",
-							"value": "1000"
+							"value": "10000"
 						}
 					]
 				}
@@ -179,7 +179,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/performance/tests/select/postgres?total=1000",
+					"raw": "http://localhost:8080/performance/tests/select/postgres",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -190,12 +190,6 @@
 						"tests",
 						"select",
 						"postgres"
-					],
-					"query": [
-						{
-							"key": "total",
-							"value": "1000"
-						}
 					]
 				}
 			},
@@ -383,6 +377,138 @@
 						"performance",
 						"tests",
 						"selectGroupBy",
+						"iris"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update - Mysql",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/update/mysql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"update",
+						"mysql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update - Postgres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/delete/postgres",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"delete",
+						"postgres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update - IRIS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/delete/iris",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"delete",
+						"iris"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete - Mysql",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/delete/mysql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"delete",
+						"mysql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete - Postgres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/delete/postgres",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"delete",
+						"postgres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete - IRIS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/performance/tests/delete/iris",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"performance",
+						"tests",
+						"delete",
 						"iris"
 					]
 				}
