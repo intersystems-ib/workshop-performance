@@ -10,6 +10,7 @@ CREATE TABLE test.country (
 CREATE TABLE test.city (
     id INT PRIMARY KEY,
     name VARCHAR(225),
+    country INT,
     CONSTRAINT fk_country
         FOREIGN KEY(country)
             REFERENCES test.country(id)
