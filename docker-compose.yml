@@ -43,15 +43,17 @@ services:
 
   # iris
   iris:
-    init: true
-    container_name: iris
-    build:
-      context: .
-      dockerfile: iris/Dockerfile
+    build: 
+      context: iris
     ports:
       - 52773:52773
       - 1972:1972
-    command: --check-caps false --ISCAgent false
+    environment:
+      IRIS_NAMESPACE: TEST
+      IRIS_USERNAME: testuser
+      IRIS_PASSWORD: testpassword
+    volumes:
+    - ./iris/sql/dump.sql:/docker-entrypoint-initdb.d/dump.sql
 
   # tomcat
   tomcat:
